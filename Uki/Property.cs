@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Uki {
-	class Property {
+	public class Property {
+		private string name;
+		private string value;
+
 		/// <summary>
 		/// Initializes an empty manifest property.
 		/// </summary>
@@ -20,10 +23,8 @@ namespace Uki {
 			// Check if the manifest line is valid.
 			if (lineParts.Length > 2) {
 				throw new Exception("Manifest line can only contain one '=' character");
-				return;
 			} else if (lineParts.Length == 0) {
 				throw new Exception("Manifest line doesn't contain an '=' character");
-				return;
 			}
 
 			// Actually set the name and value.
@@ -41,7 +42,20 @@ namespace Uki {
 			Value = value;
 		}
 
-		public string Name { get; set; }
-		public string Value { get; set; }
+		/// <summary>
+		/// Property name.
+		/// </summary>
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
+		
+		/// <summary>
+		/// Property value.
+		/// </summary>
+		public string Value {
+			get { return this.value; }
+			set { this.value = value; }
+		}
 	}
 }

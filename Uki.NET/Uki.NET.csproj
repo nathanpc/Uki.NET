@@ -67,6 +67,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Uki\Uki.csproj">
+      <Project>{F4F26BE1-2637-4707-9134-9587BD1F6614}</Project>
+      <Name>Uki</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

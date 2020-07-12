@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Property.cs" />
     <Compile Include="Workspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

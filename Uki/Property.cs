@@ -57,5 +57,13 @@ namespace Uki {
 			get { return this.value; }
 			set { this.value = value; }
 		}
+
+		/// <summary>
+		/// Gets a string representation of the property.
+		/// </summary>
+		/// <returns>String representation of the object.</returns>
+		public override string ToString() {
+			return Name + ": " + Value;
+		}
 	}
 }

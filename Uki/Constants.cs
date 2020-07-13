@@ -16,5 +16,8 @@ namespace Uki {
 		// Extensions
 		public const string ARTICLE_EXTENSION  = "htm";
 		public const string TEMPLATE_EXTENSION = "htm";
+
+		// Variables
+		public const string VAR_WIKI_NAME = "wiki_name";
 	}
 }

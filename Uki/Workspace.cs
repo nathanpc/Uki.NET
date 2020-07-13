@@ -97,6 +97,20 @@ namespace Uki {
 		}
 
 		/// <summary>
+		/// Wiki name.
+		/// </summary>
+		public Property Name {
+			get {
+				foreach (Property variable in variables) {
+					if (variable.Name == Constants.VAR_WIKI_NAME)
+						return variable;
+				}
+
+				return null;
+			}
+		}
+
+		/// <summary>
 		/// Workspace articles.
 		/// </summary>
 		public List<Page> Articles {

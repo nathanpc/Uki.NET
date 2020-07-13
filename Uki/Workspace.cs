@@ -8,6 +8,8 @@ namespace Uki {
 		private string rootPath;
 		private List<Property> properties;
 		private List<Property> variables;
+		private List<Page> templates;
+		private List<Page> articles;
 
 		/// <summary>
 		/// Initializes an empty workspace.
@@ -15,6 +17,8 @@ namespace Uki {
 		public Workspace() {
 			properties = new List<Property>();
 			variables = new List<Property>();
+			templates = new List<Page>();
+			articles = new List<Page>();
 		}
 
 		/// <summary>
@@ -28,6 +32,10 @@ namespace Uki {
 			// Parse manifests.
 			properties = ParseManifest(Path.Combine(Root, Constants.MANIFEST_PATH));
 			variables = ParseManifest(Path.Combine(Root, Constants.VARIABLES_PATH));
+
+			// Get articles and templates.
+			templates = GetPages(Path.Combine(Root, Constants.TEMPLATE_ROOT));
+			articles = GetPages(Path.Combine(Root, Constants.ARTICLE_ROOT));
 		}
 
 		/// <summary>
@@ -44,6 +52,26 @@ namespace Uki {
 			}
 
 			return props;
+		}
+
+		/// <summary>
+		/// Gets the pages in a directory recursively.
+		/// </summary>
+		/// <returns>Pages in the directory.</returns>
+		private List<Page> GetPages(string path) {
+			List<Page> pages = new List<Page>();
+
+			// Go through the articles sub-directories adding their contents to the list.
+			foreach (string dir in Directory.GetDirectories(path)) {
+				pages.AddRange(GetPages(dir));
+			}
+
+			// Go through the articles directory adding them to the articles list.
+			foreach (string file in Directory.GetFiles(path)) {
+				pages.Add(new Page(this, file));
+			}
+
+			return pages;
 		}
 
 		/// <summary>
@@ -69,6 +97,20 @@ namespace Uki {
 		}
 
 		/// <summary>
+		/// Workspace articles.
+		/// </summary>
+		public List<Page> Articles {
+			get { return articles; }
+		}
+
+		/// <summary>
+		/// Workspace templates.
+		/// </summary>
+		public List<Page> Templates {
+			get { return templates; }
+		}
+
+		/// <summary>
 		/// Gets a human-readable string representation of the workspace.
 		/// </summary>
 		/// <returns>A human-readable string representation of the object.</returns>
@@ -88,6 +130,18 @@ namespace Uki {
 			sb.AppendLine("Variables:");
 			foreach (Property prop in Variables) {
 				sb.AppendLine("    " + prop.ToString());
+			}
+
+			// Articles.
+			sb.AppendLine("Templates:");
+			foreach (Page page in templates) {
+				sb.AppendLine(page.ToDebugString());
+			}
+
+			// Articles.
+			sb.AppendLine("Articles:");
+			foreach (Page page in articles) {
+				sb.AppendLine(page.ToDebugString());
 			}
 
 			return sb.ToString();

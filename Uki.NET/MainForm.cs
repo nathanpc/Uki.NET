@@ -11,11 +11,15 @@ namespace Uki.NET {
 	public partial class MainForm : Form {
 		private Workspace workspace;
 
+		/// <summary>
+		/// Initializes the form.
+		/// </summary>
 		public MainForm() {
 			// Open a new workspace and test it out.
 			workspace = new Workspace(@"C:\Documents and Settings\Administrator\My Documents\TestUki");
 			Debug.Print(workspace.ToString());
 			
+			// Initialize and display window components.
 			InitializeComponent();
 		}
 	}

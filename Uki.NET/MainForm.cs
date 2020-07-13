@@ -30,16 +30,21 @@ namespace Uki.NET {
 		/// </summary>
 		private void PopulateTreeView() {
 			List<string> paths = new List<string>();
+			Property name = workspace.Name;
+
+			// Check if the wiki has a name.
+			if (name == null)
+				name = new Property(Constants.VAR_WIKI_NAME, "Workspace");
 
 			// Populate the paths list with articles.
 			foreach (Page page in workspace.Articles) {
-				paths.Add("Workspace" + Path.DirectorySeparatorChar + "Articles" +
+				paths.Add(name.Value + Path.DirectorySeparatorChar + "Articles" +
 					page.Folder + page.ToString());
 			}
 
 			// Populate the paths list with templates.
 			foreach (Page page in workspace.Templates) {
-				paths.Add("Workspace" + Path.DirectorySeparatorChar + "Templates" +
+				paths.Add(name.Value + Path.DirectorySeparatorChar + "Templates" +
 					page.Folder + page.ToString());
 			}
 
@@ -61,6 +66,7 @@ namespace Uki.NET {
 
 			foreach (string path in paths) {
 				subPathAgg = string.Empty;
+
 				foreach (string subPath in path.Split(pathSeparator)) {
 					subPathAgg += subPath + pathSeparator;
 					TreeNode[] nodes = treeView.Nodes.Find(subPathAgg, true);
